@@ -1,0 +1,26 @@
+<div class="container-fluid image">
+  <h2 class="text-center display-4">Your Favorites List</h2>
+  <div class="row p-4 justify-content-center">
+    <ng-container *ngIf="favoritesDailyWeather.length>0; else showNoFavorites">
+      <div class="col-lg-2 col-md-6 col-sm-10 card m-4 special-card-small-favorites"
+        *ngFor="let weatherItem of favoritesDailyWeather" @fade>
+        <div class="card-body text-center">
+          <h6 class="card-text">{{weatherItem.fetchedCityName}}</h6>
+          <img src="https://developer.accuweather.com/sites/default/files/{{weatherItem.weatherIcon}}-s.png">
+          <h6 class="card-text">{{weatherItem.dailyTemperature}} C°</h6>
+          <h6 class="card-text">{{weatherItem.weatherText}}</h6>
+          <button type="button" class="btn btn-info" (click)="navigateToHome(weatherItem)">Watch
+            {{weatherItem.fetchedCityName}}
+            5 days Forecast</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #showNoFavorites>
+      <div class="card mx-auto mt-5 special-card-small-favorites" @fade>
+        <div class="card-body">
+          <h4 class="card-text text-center">You don't have any favorites cities, please add some.</h4>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

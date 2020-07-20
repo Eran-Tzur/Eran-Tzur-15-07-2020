@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Eran-Tzur-Herolo-Weather-App"
+    }
+  },
+  "defaultProject": "Eran-Tzur-Herolo-Weather-App",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

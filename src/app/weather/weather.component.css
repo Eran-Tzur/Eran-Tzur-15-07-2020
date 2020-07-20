@@ -1,0 +1,14 @@
+.special-card {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .special-card-small {
+    background-color: rgba(255, 255, 255, 0.3);
+    min-width: 155px;
+  }
+  .z-search{
+    z-index: 1;
+  }
+
+  .btn-custom{
+    height: 40px;
+  }

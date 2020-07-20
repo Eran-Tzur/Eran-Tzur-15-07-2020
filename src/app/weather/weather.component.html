@@ -1,0 +1,68 @@
+<h2 class="text-center mt-4 display-4">Forecast for the next 5 days</h2>
+<div class="mx-auto my-3 col-md-3">
+  <ng-autocomplete class="z-search" [data]="autocompleteData" [searchKeyword]="keyword"
+    (selected)='onSelectEvent($event)' (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate" [placeHolder]="placeholder" (keypress)="allowEnglishLettersOnKeyUp($event)"
+    (inputCleared)="onAutocompleteCleared()" [debounceTime]="400">
+  </ng-autocomplete>
+</div>
+<div class="alert alert-danger text-center col-lg-4 mx-auto" *ngIf="!isSearchValid">only English letters allowed
+</div>
+<div class="mx-auto border-light special-card p-2 col-xl-8 col-lg-10" @fade>
+  <div class="ng-autocomplete mx-auto mb-3">
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name + ', ' + item.country"></a>
+
+    </ng-template>
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+  <ng-container *ngIf="!isDailyLoading; else showDailyLoading">
+    <div class="row" *ngIf="fetchedCityIndex; else showDailyLoading" @fade>
+      <div class="p-4 col-lg-9 row text-center">
+        <img class="" src="https://developer.accuweather.com/sites/default/files/{{weatherIcon}}-s.png"
+          style="height: 50px;">
+        <div>
+          <h5>{{fetchedCityName}}</h5>
+          <h6>{{dailyTemperature}} C°</h6>
+        </div>
+      </div>
+      <div class="btn-custom col-lg-3 row p-4" @fade>
+        <img class="mx-2 mx-auto" src="../../assets/images/favorite.svg" style="width: 30px;">
+        <button *ngIf="!isInFavorites; else showRemoveFromFavorites" type="button" class="btn btn-light mx-auto"
+          (click)="AddToFavorites()">Add to
+          favorites</button>
+        <ng-template #showRemoveFromFavorites>
+          <button type="button" class="btn btn-light" (click)="removeFromFavorites()">Remove
+            from favorites</button></ng-template>
+      </div>
+    </div>
+    <h2 class="text-center my-4">{{weatherText}}</h2>
+  </ng-container>
+  <ng-template #showDailyLoading>
+    <div class="row mb-5">
+      <div class="mx-auto">
+        <span class="sr-only">Loading...</span>
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+    </div>
+  </ng-template>
+  <div class="card-deck m-2" *ngIf="!isForecastLoading; else showForecastLoading">
+    <div class="card m-2 special-card-small" *ngFor="let weatherItem of currentWeatherForecast" @fade>
+      <div class="card-body text-center">
+        <img src="https://developer.accuweather.com/sites/default/files/{{weatherItem.weatherIcon}}-s.png">
+        <h5 class="card-title">{{weatherItem.date | date :'EEEE'}}</h5>
+        <h6 class="card-text">{{weatherItem.temperature}} C°</h6>
+      </div>
+    </div>
+  </div>
+  <ng-template #showForecastLoading>
+    <div class="row">
+      <div class="mx-auto">
+        <span class="sr-only">Loading...</span>
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+    </div>
+  </ng-template>
+</div>

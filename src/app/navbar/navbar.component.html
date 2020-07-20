@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-g-color">
+  <a class="navbar-brand" href="#">Herolo Weather App</a>
+  <button (click)="toggleNavbar = !toggleNavbar" class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngbCollapse]="!toggleNavbar" class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li ngbDropdown class="nav-item" [routerLinkActive]="['active']">
+        <a [routerLink]="['/home']" class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a [routerLink]="['/favorites']" class="nav-link" routerLink="/favorites">Favorites</a>
+      </li>
+    </ul>
+  </div>
+</nav>
