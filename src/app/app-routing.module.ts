@@ -16,7 +16,12 @@ const routes: Routes = [
   {
     path: 'favorites',
     component: FavoritesComponent
-  }];
+  },
+  {
+    path: "**",
+    component: WeatherComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
